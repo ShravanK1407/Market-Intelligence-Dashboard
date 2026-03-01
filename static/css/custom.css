@@ -1,4 +1,115 @@
-/* Custom styles for the application */
+:root {
+    --bg-dark: #121212;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --cyber-blue: #00d2ff;
+    --neon-green: #39ff14;
+    --vibrant-red: #ff3131;
+    --text-muted: #888;
+    --text-light: #e0e0e0;
+}
+
 body {
-    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, .brand-font {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: var(--cyber-blue);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 10px 0;
+    background: linear-gradient(45deg, var(--cyber-blue), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.metric-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ticker-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--glass-border);
+    border-radius: 12px;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    width: 300px;
+    transition: border-color 0.3s ease;
+}
+
+.ticker-input:focus {
+    outline: none;
+    border-color: var(--cyber-blue);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-cyber {
+    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-cyber:hover {
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.headline-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.95rem;
+}
+
+.headline-item:last-child {
+    border-bottom: none;
+}
+
+.sentiment-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-success { background: rgba(57, 255, 20, 0.2); color: var(--neon-green); border: 1px solid var(--neon-green); }
+.badge-danger { background: rgba(255, 49, 49, 0.2); color: var(--vibrant-red); border: 1px solid var(--vibrant-red); }
+.badge-secondary { background: rgba(136, 136, 136, 0.2); color: var(--text-muted); border: 1px solid var(--text-muted); }
+
+.hero-gradient {
+    background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.1), transparent);
+    min-height: 100vh;
 }

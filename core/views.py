@@ -1,25 +1,24 @@
-import os
-import platform
-
-from django import get_version as django_version
 from django.shortcuts import render
-from django.utils import timezone
+from .market_utils import get_market_analysis
 
+def index(request):
+    symbol = request.GET.get("symbol", "AAPL").strip()
+    analysis = None
+    error = None
 
-def home(request):
-    """Render the landing screen with loader and environment details."""
-    host_name = request.get_host().lower()
-    agent_brand = "AppWizzy" if host_name == "appwizzy.com" else "Flatlogic"
-    now = timezone.now()
+    if symbol:
+        try:
+            analysis = get_market_analysis(symbol)
+            if not analysis.get("markov") and not analysis.get("tech"):
+                error = f"Unable to fetch data for symbol: {symbol}"
+                analysis = None
+        except Exception as e:
+            error = f"An error occurred: {str(e)}"
+            analysis = None
 
     context = {
-        "project_name": "New Style",
-        "agent_brand": agent_brand,
-        "django_version": django_version(),
-        "python_version": platform.python_version(),
-        "current_time": now,
-        "host_name": host_name,
-        "project_description": os.getenv("PROJECT_DESCRIPTION", ""),
-        "project_image_url": os.getenv("PROJECT_IMAGE_URL", ""),
+        "analysis": analysis,
+        "error": error,
+        "symbol": symbol
     }
     return render(request, "core/index.html", context)
